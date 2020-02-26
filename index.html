@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="your name">
+        <meta name="description" content="include some description about your page">
+        
+         <!-- if you choose to use CDN for CSS bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        
+        <title>Recipe Hompage</title>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #8e44ad;">
+                <div class="container">
+                    <a class="navbar-brand" href="#">ReciBlog</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                        <!-- <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li> -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    My Recipes
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Categories</a>
+                                    <a class="dropdown-item" href="#">Favorited</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">+ Add Recipe</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Calorie Tracker</a>
+                            </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li> -->
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                        <ul class="navbar-nav d-none d-lg-flex ml-2 order-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Sign in</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+
+        </div>
+    </body>
+</html>
+
+<!-- <div class="container"><a href="https://themes.getbootstrap.com" class="navbar-brand">Recipe Website</a>
+                    <div class="d-flex ml-auto">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#globalNavbar" aria-controls="globalNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="globalNavbar">
+                        <form class="form-inline form-navbar my-2 my-lg-0 order-2" action="https://themes.getbootstrap.com/shop/">
+                            <input class="form-control" name="s" type="text" placeholder="Search">
+                        </form>
+                        <ul class="navbar-nav mr-auto order-1">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <div class="navbar-collapse navbar-top-collapse">
+                                        <ul id="menu-top-menu" class="nav navbar-nav">
+                                            <li id="menu-item-601" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-601">
+                                                <a title="Admin &amp; Dashboard" href="https://themes.getbootstrap.com/product-category/admin-dashboard/">Admin &amp; Dashboard</a>
+                                            </li>
+                                            <li id="menu-item-603" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-603">
+                                                <a title="Landing &amp; Corporate" href="https://themes.getbootstrap.com/product-category/landing-corporate/">Landing &amp; Corporate</a>
+                                            </li>
+                                            <li id="menu-item-1537" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1537">
+                                                <a title="Application" href="https://themes.getbootstrap.com/product-category/application/">Application</a>
+                                            </li>
+                                            <li id="menu-item-602" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-602">
+                                                <a title="E-Commerce &amp; Retail" href="https://themes.getbootstrap.com/product-category/ecommerce-retail/">E-Commerce &amp; Retail</a>
+                                            </li>
+                                            <li id="menu-item-1538" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1538">
+                                                <a title="Portfolio &amp; Blog" href="https://themes.getbootstrap.com/product-category/portfolio-blog/">Portfolio &amp; Blog</a>
+                                            </li>
+                                            <li id="menu-item-1539" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1539">
+                                                <a title="Specialty" href="https://themes.getbootstrap.com/product-category/specialty/">Specialty</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://themes.getbootstrap.com/official-themes">Why Our Themes?</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://themes.getbootstrap.com/sell/">Sell themes</a>
+                            </li>
+                        </ul>
+                        <form class="form-inline form-navbar my-2 my-lg-0 order-2">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                        <ul class="navbar-nav d-none d-lg-flex ml-2 order-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://themes.getbootstrap.com/signin/">Sign in</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://themes.getbootstrap.com/my-account/">Sign up</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav d-lg-none">
+                            <li class="nav-item-divider"></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://themes.getbootstrap.com/signin/">Sign in</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://themes.getbootstrap.com/my-account/">Sign up</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div> -->
+            <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="#">Recipe Website</a>
+                    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">   
+                        <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>              
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            <a class="dropdown-item" href="#">Design</a>
+                            <a class="dropdown-item" href="#">Development</a>
+                            <a class="dropdown-item" href="#">Consulting</a>
+                            </div>
+                        </li>                            
+                        <li class="nav-item"> 
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Disabled-menu</a>
+                        </li>            
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                        <div>
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log In</button>
+                        </div>
+                    </div>
+                </div>  
+            </nav> -->
