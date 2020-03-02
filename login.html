@@ -220,14 +220,15 @@
             </div>
           </div>
           <script>
-              function validateInfo(){
+              var validateInfo = function(){
                   var us = document.getElementById("id_username").value;
                   var pass = document.getElementById("id_password").value;
 
                   if( us == "" || pass == "" ){
                         document.getElementById("id_username").focus();
                         document.getElementById("id_password").focus();
-                        document.getElementById("input-error").innerHTML = "Neither username nor password can be left blank";
+                        alert("Neither username nor password can be left blank");
+                        //document.getElementById("input-error").innerHTML = "Neither username nor password can be left blank";
                   } 
                 //   else if( us = "" && pass != ""){
                 //         document.getElementById("id_username").focus();
