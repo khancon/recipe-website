@@ -48,7 +48,7 @@
                                     Add Recipe</a>
                             </div>
                         </li>
-                        <li class="nav-item"> <a class="nav-link" href="#">Calorie Tracker</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="./calorie.html">Calorie Tracker</a></li>
                         <!-- <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                         </li> -->
                     </ul>
@@ -66,27 +66,24 @@
     <div class="container">
 
 
-        <h1>Add New Recipe...</h1>
+        <h1>Count Your Calories</h1>
         <hr>
         <form method="post" enctype="multipart/form-data" onsubmit="return validateInfo()">
-            <label for="rname">Recipe Name:</label><br>
-            <input type="text" id="rname" name="rname"><br>
-            <span class = "error" id="rname-note"></span>
+            <label for="meal_1">Meal 1:</label><br>
+            <input type="number" id="meal_1" name="meal_1"><br>
+            <!-- <span class = "error" id="meal_1-note"></span> -->
             <br>
-            <label for="Iname">Ingredients List:</label><br>
-            <input type="text" id="Iname" name="Iname"><br><br>
-            
-
-
-            Select image to upload:
-            <input type="file" name="fileToUpload" id="fileToUpload">
-            
-            <br><br>
-            Recipe Directions : <br />
-            <textarea rows="5" cols="50" name="directions">Enter directions here...
-         </textarea>
-            <br><br>
+            <label for="meal_2">Meal 2:</label><br>
+            <input type="number" id="meal_2" name="meal_2"><br>
+            <!-- <span class = "error" id="meal_2-note"></span> -->
+            <br>
+            <label for="meal_3">Meal 3:</label><br>
+            <input type="number" id="meal_3" name="meal_3"><br>
+            <span class = "error" id="meal_1-note"></span>
+            <br>
             <input type="submit" value="Submit">
+            <br>
+            <span class = "result" id="cal_sum"></span>
         </form>
         <style>
             .error {
@@ -96,18 +93,26 @@
           </style>
         
         <script>
-            document.getElementById("Iname");
+            document.getElementById("meal_2");
             function validateInfo() {
                 console.log("Hello");
-                if (document.getElementById("rname").value === '') {
-                    document.getElementById("rname").focus();
-                    document.getElementById("rname-note").innerHTML = "Please enter recipe's name";
+                if (document.getElementById("meal_1").value == '' | document.getElementById("meal_2").value == '' | document.getElementById("meal_3").value == '') {
+                    document.getElementById("meal_1").focus();
+                    document.getElementById("cal_sum").innerHTML = "";
+                    //document.getElementById("meal_1") = "";
+                    document.getElementById("meal_1-note").innerHTML = "Please enter whole number calories for all three meals";
                     return false;
                 }
                 else{
-                    document.getElementById("rname-note").innerHTML = "";
-                    return true;
+                    document.getElementById("meal_1-note").innerHTML = "";
+                    var val1 = parseInt(document.getElementById("meal_1").value);
+                    var val2 = parseInt(document.getElementById("meal_2").value);
+                    var val3 = parseInt(document.getElementById("meal_3").value);
+                    var sum = val1 + val2 + val3;
+                    document.getElementById("cal_sum").innerHTML = "" + sum;
+                    return false;
                 }
+                return true;
             }
         </script>
     </div>
