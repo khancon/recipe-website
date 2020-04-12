@@ -23,35 +23,13 @@
         <title>ReciBlog</title>
     </head>
     <body>
-      <header>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #8e44ad;">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="./index.html">ReciBlog</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                    <!-- <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li> --><li class="nav-item dropdown">    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        My Recipes    </a>    <div class="dropdown-menu" aria-labelledby="navbarDropdown">        <a class="dropdown-item" href="#">Categories</a>        <a class="dropdown-item" href="#">Favorited</a>        <div class="dropdown-divider"></div>        <a class="dropdown-item" href="./newrecipe.html">+ Add Recipe</a>    </div></li><li class="nav-item">    <a class="nav-link" href="./calorie.html">Calorie Tracker</a></li>
-                    <!-- <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li> -->
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0"><input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                    <ul class="navbar-nav d-none d-lg-flex ml-2 order-3"><li class="nav-item">    <a class="nav-link" href="./login.html">Sign in</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-      </header>
+    <?php include('header.php') ?>
         <div class="container">
             <div class="row">
               <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card card-signin my-5">
                   <div class="card-body">
-                    <form method="post" class="form-signin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                   <form method="post" class="form-signin" action="<?php $_SERVER['PHP_SELF'] ?>">
                       <h1 class="card-title text-center text-uppercase" style="color: #8e44ad">Sign Up</h1>
                       <!-- <div class="form-label-group">
                         <input type="username" id="{{form.username.auto_id}}" class="form-control" placeholder="Username" required autofocus>
@@ -93,9 +71,9 @@
                         <label for="id_password">Password</label>
                       </div>
                       <span class="error" id="input-error"></span>
-                      <!-- <button class="btn btn-lg btn-block text-uppercase login-button" type="submit" onclick="validateInfo()">Sign Up</button> -->
-                      
-                      <a href="./login.html" type="button" class="btn btn-lg btn-block text-uppercase" style="background-color:white; border-color:#8e44ad; color:#8e44ad; border-width: thin thin thin thin">Have an Account? Login!</a>
+                      <button class="btn btn-lg btn-block text-uppercase login-button" name="btnaction" value="insertNewUser" type="submit" onclick="validateInfo()">Sign Up</button>
+                      <!-- <a href="./index.html" type="button" class="btn btn-lg btn-block text-uppercase login-button" value="insertNewUser" type="submit" onclick="validateInfo()">Sign Up</a> -->
+                      <a href="./login.php" type="button" class="btn btn-lg btn-block text-uppercase" style="background-color:white; border-color:#8e44ad; color:#8e44ad; border-width: thin thin thin thin">Made an Account? Login!</a>
                       <!-- <hr class="my-4">
                       <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
                       <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> -->
@@ -106,35 +84,55 @@
             </div>
           </div>
           <?php 
+            // if (isset($_GET['btnaction']))
+            // {	
+            //   try 
+            //   { 	
+            //       switch ($_GET['btnaction']) 
+            //       {
+            //         // case 'create': createTable(); break;
+            //         case 'insertNewUser': insertNewUser();  break;
+            //         // case 'select': selectData();  break;
+            //         // case 'update': updateData();  break;
+            //         // case 'delete': deleteData();  break;
+            //         // case 'drop':   dropTable();   break;      
+            //       }
+            //   }
+            //   catch (Exception $e)       // handle any type of exception
+            //   {
+            //       $error_message = $e->getMessage();
+            //       echo "<p>Error message: $error_message </p>";
+            //   }   
+            // }
+              require('connect-db.php');
 
-            require('connect-db.php');
+              $firstName = $lastName = $password = $username = $email = "";
 
-            $firstName = $lastName = $password = $username = $email = "";
+              if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $firstName = test_input($_POST["firstName"]);
+                $lastName = test_input($_POST["lastName"]);
+                $email = test_input($_POST["email"]);
+                $username = test_input($_POST["username"]);
+                $password = test_input($_POST["password"]);
+              }
 
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-              $firstName = test_input($_POST["firstName"]);
-              $lastName = test_input($_POST["lastName"]);
-              $email = test_input($_POST["email"]);
-              $username = test_input($_POST["username"]);
-              $password = test_input($_POST["password"]);
-            }
+              function test_input($data) {
+                $data = trim($data);
+                $data = stripslashes($data);
+                $data = htmlspecialchars($data);
+                return $data;
+              }
 
-            function test_input($data) {
-              $data = trim($data);
-              $data = stripslashes($data);
-              $data = htmlspecialchars($data);
-              return $data;
-            }
-
-            $query = "INSERT INTO user(firstName, lastName, username, password, email) VALUES (:firstName, :lastName, :username, :password, :email)";
-            $statement = $db->prepare($query);
-            $statement->bindValue(':firstName', $firstName);
-            $statement->bindValue(':lastName', $lastName);
-            $statement->bindValue(':username', $username);
-            $statement->bindValue(':password', $password);
-            $statement->bindValue(':email', $email);
-            $statement->execute();
-            $statement->closeCursor();
+              $query = "INSERT INTO user(firstName, lastName, username, password, email) VALUES (:firstName, :lastName, :username, :password, :email)";
+              $statement = $db->prepare($query);
+              $statement->bindValue(':firstName', $firstName);
+              $statement->bindValue(':lastName', $lastName);
+              $statement->bindValue(':username', $username);
+              $statement->bindValue(':password', $password);
+              $statement->bindValue(':email', $email);
+              $statement->execute();
+              $statement->closeCursor();
+              //header("Location: ", "index.html");
 
             // echo $firstName;
             // echo "<br>";

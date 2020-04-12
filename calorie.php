@@ -26,44 +26,7 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #8e44ad;">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="./index.html">ReciBlog</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <!-- <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li> -->
-                        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> My
-                                Recipes </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item"
-                                    href="#">Categories</a> <a class="dropdown-item" href="#">Favorited</a>
-                                <div class="dropdown-divider"></div> <a class="dropdown-item" href="./newrecipe.html">+
-                                    Add Recipe</a>
-                            </div>
-                        </li>
-                        <li class="nav-item"> <a class="nav-link" href="./calorie.html">Calorie Tracker</a></li>
-                        <!-- <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                        </li> -->
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0"><input class="form-control mr-sm-2" type="search"
-                            placeholder="Search" aria-label="Search"><button class="btn btn-outline-light my-2 my-sm-0"
-                            type="submit">Search</button>
-                    </form>
-                    <ul class="navbar-nav d-none d-lg-flex ml-2 order-3">
-                        <li class="nav-item"> <a class="nav-link" href="./login.html">Sign in</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <?php include('header.php') ?>
     <div class="container">
 
 
@@ -117,6 +80,15 @@
             }
         </script>
     </div>
+    <?php 
+        echo "\n";
+        echo $_SESSION['email'];
+        echo "\n";
+        echo $_SESSION['firstName'];
+        echo "\n";
+        echo $_SESSION['lastName'];
+        echo "\n";
+    ?>
 </body>
 
 </html>

@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    <header>
+    <!-- <header>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #8e44ad;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./index.html">ReciBlog</a>
@@ -37,8 +37,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <!-- <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li> -->
+                        
                         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> My
                                 Recipes </a>
@@ -49,32 +48,31 @@
                             </div>
                         </li>
                         <li class="nav-item"> <a class="nav-link" href="./calorie.html">Calorie Tracker</a></li>
-                        <!-- <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                        </li> -->
+                        
                     </ul>
                     <form class="form-inline my-2 my-lg-0"><input class="form-control mr-sm-2" type="search"
                             placeholder="Search" aria-label="Search"><button class="btn btn-outline-light my-2 my-sm-0"
                             type="submit">Search</button>
                     </form>
                     <ul class="navbar-nav d-none d-lg-flex ml-2 order-3">
-                        <li class="nav-item"> <a class="nav-link" href="./login.html">Sign in</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="./login.php">Sign in</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-    </header>
+    </header> -->
+    <?php include('header.php') ?>
     <div class="container">
-
-
+        <br>
         <h1>Add New Recipe...</h1>
         <hr>
-        <form method="post" enctype="multipart/form-data" onsubmit="return validateInfo()">
-            <label for="rname">Recipe Name:</label><br>
-            <input type="text" id="rname" name="rname"><br>
-            <span class = "error" id="rname-note"></span>
+        <form action="form-handler.php" method="post" enctype="multipart/form-data" onsubmit="return validateInfo()">
+            <label for="recipename">Recipe Name:</label><br>
+            <input type="text" id="recipename" name="recipename"><br>
+            <span class = "error" id="recipename-note"></span>
             <br>
-            <label for="Iname">Ingredients List:</label><br>
-            <input type="text" id="Iname" name="Iname"><br><br>
+            <label for="ingredients">Ingredients List:</label><br>
+            <input type="text" id="ingredients" name="ingredients"><br><br>
             
 
 
@@ -96,16 +94,16 @@
           </style>
         
         <script>
-            document.getElementById("Iname");
+            document.getElementById("ingredients");
             function validateInfo() {
                 console.log("Hello");
-                if (document.getElementById("rname").value === '') {
-                    document.getElementById("rname").focus();
-                    document.getElementById("rname-note").innerHTML = "Please enter recipe's name";
+                if (document.getElementById("recipename").value === '') {
+                    document.getElementById("recipename").focus();
+                    document.getElementById("recipename-note").innerHTML = "Please enter recipe's name";
                     return false;
                 }
                 else{
-                    document.getElementById("rname-note").innerHTML = "";
+                    document.getElementById("recipename-note").innerHTML = "";
                     return true;
                 }
             }

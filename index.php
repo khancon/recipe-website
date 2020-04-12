@@ -19,7 +19,7 @@
         <title>ReciBlog</title>
     </head>
     <body>
-        <header>
+        <!-- <header>
             <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #8e44ad;">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="./index.html">ReciBlog</a>
@@ -29,19 +29,28 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                        <!-- <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li> --><li class="nav-item dropdown">    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        My Recipes    </a>    <div class="dropdown-menu" aria-labelledby="navbarDropdown">        <a class="dropdown-item" href="#">Categories</a>        <a class="dropdown-item" href="#">Favorited</a>        <div class="dropdown-divider"></div>        <a class="dropdown-item" href="./newrecipe.html">+ Add Recipe</a>    </div></li><li class="nav-item">    <a class="nav-link" href="./calorie.html">Calorie Tracker</a></li>
-                        <!-- <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                        </li> -->
+                        <li class="nav-item dropdown">    
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Recipes</a>    
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
+                            <a class="dropdown-item" href="#">Categories</a>        
+                            <a class="dropdown-item" href="#">Favorited</a>        
+                            <div class="dropdown-divider"></div>        
+                                <a class="dropdown-item" href="./newrecipe.html">+ Add Recipe</a>    
+                            </div>
+                        </li>
+                        <li class="nav-item">    
+                            <a class="nav-link" href="./calorie.html">Calorie Tracker</a>
+                        </li>
                         </ul>
                         <form class="form-inline my-2 my-lg-0"><input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
                         </form>
-                        <ul class="navbar-nav d-none d-lg-flex ml-2 order-3"><li class="nav-item">    <a class="nav-link" href="./login.html">Sign in</a></li>
+                        <ul class="navbar-nav d-none d-lg-flex ml-2 order-3"><li class="nav-item">    <a class="nav-link" href="./login.php">Sign in</a></li>
                         </ul>
                     </div>
                 </div>
             </nav>
-        </header>
+        </header> -->
+        <?php include('header.php') ?>
         <div class="container-fluid">
             <!-- Jumbo Tron Top Card -->
             <br>
@@ -94,7 +103,7 @@
                 <div class="col-md-8 blog-main">
                     <div class="jumbotron p-4 p-md-5 text-white rounded" style="background-color: #b154d8;">
                         <div class="col-md-6 px-0">
-                          <h1 class="display-4 font-italic">Veganism</h1>
+                          <h1 class="display-4 font-italic">Veganismssss</h1>
                           <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
                           <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
                         </div>

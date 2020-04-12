@@ -7,7 +7,6 @@
         <meta name="author" content="your name">
         <meta name="description" content="include some description about your page">
         
-         <!-- if you choose to use CDN for CSS bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -23,7 +22,7 @@
         <title>ReciBlog</title>
     </head>
     <body>
-      <header>
+      <!-- <header>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #8e44ad;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./index.html">ReciBlog</a>
@@ -33,25 +32,50 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                    <!-- <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li> --><li class="nav-item dropdown">    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        My Recipes    </a>    <div class="dropdown-menu" aria-labelledby="navbarDropdown">        <a class="dropdown-item" href="#">Categories</a>        <a class="dropdown-item" href="#">Favorited</a>        <div class="dropdown-divider"></div>        <a class="dropdown-item" href="./newrecipe.html">+ Add Recipe</a>    </div></li><li class="nav-item">    <a class="nav-link" href="./calorie.html">Calorie Tracker</a></li>
-                    <!-- <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li> -->
+                      <li class="nav-item dropdown">    
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Recipes</a>    
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
+                          <a class="dropdown-item" href="#">Categories</a>        
+                          <a class="dropdown-item" href="#">Favorited</a>        
+                          <div class="dropdown-divider"></div>        
+                            <a class="dropdown-item" href="./newrecipe.html">+ Add Recipe</a>    
+                          </div>
+                      </li>
+                      <li class="nav-item">    
+                        <a class="nav-link" href="./calorie.html">Calorie Tracker</a>
+                      </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0"><input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
                     </form>
-                    <ul class="navbar-nav d-none d-lg-flex ml-2 order-3"><li class="nav-item">    <a class="nav-link" href="./login.html">Sign in</a></li>
+                    <ul class="navbar-nav d-none d-lg-flex ml-2 order-3"><li class="nav-item">    <a class="nav-link" href="./login.php">Sign in</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-    </header>
+    </header> -->
+        <?php 
+          // $stat = (session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE);
+          // if($stat == TRUE){
+          //   echo "BEFORE TRUE \n";
+          // } else {
+          //   echo "BEFORE FALSE \n";
+          // }
+        ?>
+        <?php include('header.php') ?>
+        <?php 
+          // $stat = (session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE);
+          // if($stat == TRUE){
+          //   echo "AFTER TRUE \n";
+          // } else {
+          //   echo "AFTER FALSE \n";
+          // }
+        ?>
         <div class="container">
             <div class="row">
               <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card card-signin my-5">
                   <div class="card-body">
-                    <form method="post" class="form-signin">
+                    <form method="post" action="<?php $_SERVER['PHP_SELF'] ?>" class="form-signin">
                       <h1 class="card-title text-center text-uppercase" style="color: #8e44ad">Sign In</h1>
                       <!-- <div class="form-label-group">
                         <input type="username" id="{{form.username.auto_id}}" class="form-control" placeholder="Username" required autofocus>
@@ -69,8 +93,8 @@
                       <!-- {{ form.password }} -->
                       <div class="form-label-group">
                         <!-- {{form.username}} -->
-                        <input id="id_username" name="username" type="text" class="form-control username-button" placeholder="Username" required autofocus/>
-                        <label for="id_username">Username</label>
+                        <input id="id_email" name="email" type="text" class="form-control email-button" placeholder="email" required autofocus/>
+                        <label for="id_email">Email</label>
                       </div>
                       <div class="form-label-group">
                         <!-- {{form.password}} -->
@@ -88,6 +112,60 @@
               </div>
             </div>
           </div>
+          <?php 
+              require('connect-db.php');
+              global $db;
+
+              if($_SERVER['REQUEST_METHOD'] == 'POST')
+              {
+                $email = htmlspecialchars($_POST['email']);
+                $password = htmlspecialchars($_POST['password']);
+
+                $query = "SELECT * FROM user WHERE email=:email";
+                $statement = $db->prepare($query);
+                $statement->bindValue(':email', $email);
+                // $statement->bindValue(':due', $due);
+                // $statement->bindValue(':priority', $priority);
+                // $statement->bindValue(':id', $id);
+                $statement->execute();
+
+                if($statement->rowCount() > 0){
+                  $t = $statement->fetch();
+                  $p = $t[3];
+                  // print_r($t);
+                  // echo "\n";
+                  // echo $p;
+                  // echo "\n";
+                  // echo $password;
+                  // echo "\n";
+                  //echo $t;
+                  if ($password == $p){
+                    $firstName = $t[0];
+                    $lastName = $t[1];
+                    $username = $t[2];
+                    $_SESSION['email'] = $email;
+                    $_SESSION['firstName'] = $firstName;
+                    $_SESSION['lastName'] = $lastName;
+                    $_SESSION['username'] = $username;
+                    echo "signed in!";
+                  } else {
+                    echo "Incorrect email or password (1)";
+                  } 
+                } else {
+                  echo "Incorrect email or password (2)";
+                }
+                $statement->closeCursor();
+              }
+              echo "\n";
+              echo $_SESSION['email'];
+              echo "\n";
+              echo $_SESSION['firstName'];
+              echo "\n";
+              echo $_SESSION['lastName'];
+              echo "\n";
+              echo $_SESSION['username'];
+              echo "\n";
+          ?>
           <script>
               var validateInfo = function(){
                   var us = document.getElementById("id_username").value;
