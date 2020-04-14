@@ -107,65 +107,72 @@
                       <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
                       <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> -->
                     </form>
+                    <?php 
+                      require('connect-db.php');
+                      global $db;
+
+                      if($_SERVER['REQUEST_METHOD'] == 'POST')
+                      {
+                        $email = htmlspecialchars($_POST['email']);
+                        $password = htmlspecialchars($_POST['password']);
+
+                        $query = "SELECT * FROM user WHERE email=:email";
+                        $statement = $db->prepare($query);
+                        $statement->bindValue(':email', $email);
+                        // $statement->bindValue(':due', $due);
+                        // $statement->bindValue(':priority', $priority);
+                        // $statement->bindValue(':id', $id);
+                        $statement->execute();
+
+                        if($statement->rowCount() > 0){
+                          $t = $statement->fetch();
+                          $p = $t[3];
+                          // print_r($t);
+                          // echo "\n";
+                          // echo $p;
+                          // echo "\n";
+                          // echo $password;
+                          // echo "\n";
+                          //echo $t;
+                          if ($password == $p){
+                            $firstName = $t[0];
+                            $lastName = $t[1];
+                            $username = $t[2];
+                            $_SESSION['email'] = $email;
+                            $_SESSION['firstName'] = $firstName;
+                            $_SESSION['lastName'] = $lastName;
+                            $_SESSION['username'] = $username;
+                            echo "<br>";
+                            echo "Successfully signed in as ";
+                            echo $_SESSION['username'];
+                            echo "!";
+                            //header("Location: ./index.php");
+                          } else {
+                            echo "<br>";
+                            echo "Incorrect password";
+                          } 
+                        } else {
+                          echo "<br>";
+                          echo "Incorrect email";
+                        }
+                        $statement->closeCursor();
+                      }
+                      // echo "\n";
+                      // echo $_SESSION['email'];
+                      // echo "\n";
+                      // echo $_SESSION['firstName'];
+                      // echo "\n";
+                      // echo $_SESSION['lastName'];
+                      // echo "\n";
+                      // echo $_SESSION['username'];
+                      // echo "\n";
+                  ?>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <?php 
-              require('connect-db.php');
-              global $db;
-
-              if($_SERVER['REQUEST_METHOD'] == 'POST')
-              {
-                $email = htmlspecialchars($_POST['email']);
-                $password = htmlspecialchars($_POST['password']);
-
-                $query = "SELECT * FROM user WHERE email=:email";
-                $statement = $db->prepare($query);
-                $statement->bindValue(':email', $email);
-                // $statement->bindValue(':due', $due);
-                // $statement->bindValue(':priority', $priority);
-                // $statement->bindValue(':id', $id);
-                $statement->execute();
-
-                if($statement->rowCount() > 0){
-                  $t = $statement->fetch();
-                  $p = $t[3];
-                  // print_r($t);
-                  // echo "\n";
-                  // echo $p;
-                  // echo "\n";
-                  // echo $password;
-                  // echo "\n";
-                  //echo $t;
-                  if ($password == $p){
-                    $firstName = $t[0];
-                    $lastName = $t[1];
-                    $username = $t[2];
-                    $_SESSION['email'] = $email;
-                    $_SESSION['firstName'] = $firstName;
-                    $_SESSION['lastName'] = $lastName;
-                    $_SESSION['username'] = $username;
-                    echo "signed in!";
-                  } else {
-                    echo "Incorrect email or password (1)";
-                  } 
-                } else {
-                  echo "Incorrect email or password (2)";
-                }
-                $statement->closeCursor();
-              }
-              echo "\n";
-              echo $_SESSION['email'];
-              echo "\n";
-              echo $_SESSION['firstName'];
-              echo "\n";
-              echo $_SESSION['lastName'];
-              echo "\n";
-              echo $_SESSION['username'];
-              echo "\n";
-          ?>
+          
           <script>
               var validateInfo = function(){
                   var us = document.getElementById("id_username").value;

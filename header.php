@@ -27,8 +27,20 @@
                   <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
                 </form> -->
                 <ul class="navbar-nav d-none d-lg-flex ml-2 order-3">
-                  <li class="nav-item">    
-                    <a class="nav-link" href="./login.php">Sign in</a>
+                  <li class="nav-item">
+                    <?php 
+                      $stat = (session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE);
+                      if($stat == TRUE){
+                        echo "<a class=\"nav-link\" href=\"./login.php\">Hi ";
+                        echo $_SESSION['firstName'];
+                        echo "!</a>";
+                      } else {
+                        echo "<a class=\"nav-link\" href=\"./login.php\">";
+                        echo "Sign In";
+                        echo "</a>";
+                      }
+                    ?>
+                    <!-- <a class="nav-link" href="./login.php">Sign in</a> -->
                   </li>
                 </ul>
             </div>

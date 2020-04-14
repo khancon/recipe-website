@@ -29,7 +29,7 @@
               <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card card-signin my-5">
                   <div class="card-body">
-                   <form method="post" class="form-signin" action="<?php $_SERVER['PHP_SELF'] ?>">
+                   <form method="post" action="<?php $_SERVER['PHP_SELF'] ?>" class="form-signin">
                       <h1 class="card-title text-center text-uppercase" style="color: #8e44ad">Sign Up</h1>
                       <!-- <div class="form-label-group">
                         <input type="username" id="{{form.username.auto_id}}" class="form-control" placeholder="Username" required autofocus>
@@ -78,115 +78,116 @@
                       <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
                       <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> -->
                     </form>
+                    <?php 
+                      // if (isset($_GET['btnaction']))
+                      // {	
+                      //   try 
+                      //   { 	
+                      //       switch ($_GET['btnaction']) 
+                      //       {
+                      //         // case 'create': createTable(); break;
+                      //         case 'insertNewUser': insertNewUser();  break;
+                      //         // case 'select': selectData();  break;
+                      //         // case 'update': updateData();  break;
+                      //         // case 'delete': deleteData();  break;
+                      //         // case 'drop':   dropTable();   break;      
+                      //       }
+                      //   }
+                      //   catch (Exception $e)       // handle any type of exception
+                      //   {
+                      //       $error_message = $e->getMessage();
+                      //       echo "<p>Error message: $error_message </p>";
+                      //   }   
+                      // }
+                        require('connect-db.php');
+
+                        $firstName = $lastName = $password = $username = $email = "";
+
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                          $firstName = test_input($_POST["firstName"]);
+                          $lastName = test_input($_POST["lastName"]);
+                          $email = test_input($_POST["email"]);
+                          $username = test_input($_POST["username"]);
+                          $password = test_input($_POST["password"]);
+                        }
+
+                        function test_input($data) {
+                          $data = trim($data);
+                          $data = stripslashes($data);
+                          $data = htmlspecialchars($data);
+                          return $data;
+                        }
+
+                        $query = "INSERT INTO user(firstName, lastName, username, password, email) VALUES (:firstName, :lastName, :username, :password, :email)";
+                        $statement = $db->prepare($query);
+                        $statement->bindValue(':firstName', $firstName);
+                        $statement->bindValue(':lastName', $lastName);
+                        $statement->bindValue(':username', $username);
+                        $statement->bindValue(':password', $password);
+                        $statement->bindValue(':email', $email);
+                        $statement->execute();
+                        $statement->closeCursor();
+                        //header("Location: ", "index.html");
+
+                      // echo $firstName;
+                      // echo "<br>";
+                      // echo $lastName;
+                      // echo "<br>";
+                      // echo $email;
+                      // echo "<br>";
+                      // echo $username;
+                      // echo "<br>";
+                      // echo $password;
+                      // function insertData()
+                      // {
+                      //    require('connect-db.php');
+                          
+                      //    $course_id = "newid_from_insertData";
+                      //    $course_desc = "newdesc_from_insertData";
+                          
+                      //    $query = "INSERT INTO courses (courseID, course_desc) VALUES (:course_id, :course_desc)";
+                      //    $firstName = "Shahiiiira";
+                      //    $lastName = "Ali";
+                      //    $username = "Falling";
+                      //    $password = "LuvOpenLettersss<3";
+                      //    $email = "monkeyasss@gmail.com";
+
+                      //   $firstName = $lastName = $password = $username = $email = "";
+
+                      //   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                      //     $firstName = test_input($_POST["firstName"]);
+                      //     $lastName = test_input($_POST["lastName"]);
+                      //     $email = test_input($_POST["email"]);
+                      //     $username = test_input($_POST["username"]);
+                      //     $password = test_input($_POST["password"]);
+                      //   }
+
+                      //   function test_input($data) {
+                      //     $data = trim($data);
+                      //     $data = stripslashes($data);
+                      //     $data = htmlspecialchars($data);
+                      //     return $data;
+                      //   }
+                          
+
+
+                      //    $query = "INSERT INTO user(firstName, lastName, username, password, email) VALUES (:firstName, :lastName, :username, :password, :email)";
+                      //    $statement = $db->prepare($query);
+                      //    $statement->bindValue(':firstName', $firstName);
+                      //    $statement->bindValue(':lastName', $lastName);
+                      //    $statement->bindValue(':username', $username);
+                      //    $statement->bindValue(':password', $password);
+                      //    $statement->bindValue(':email', $email);
+                      //    $statement->execute();
+                      //    $statement->closeCursor();
+                      // }
+                    ?>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <?php 
-            // if (isset($_GET['btnaction']))
-            // {	
-            //   try 
-            //   { 	
-            //       switch ($_GET['btnaction']) 
-            //       {
-            //         // case 'create': createTable(); break;
-            //         case 'insertNewUser': insertNewUser();  break;
-            //         // case 'select': selectData();  break;
-            //         // case 'update': updateData();  break;
-            //         // case 'delete': deleteData();  break;
-            //         // case 'drop':   dropTable();   break;      
-            //       }
-            //   }
-            //   catch (Exception $e)       // handle any type of exception
-            //   {
-            //       $error_message = $e->getMessage();
-            //       echo "<p>Error message: $error_message </p>";
-            //   }   
-            // }
-              require('connect-db.php');
-
-              $firstName = $lastName = $password = $username = $email = "";
-
-              if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $firstName = test_input($_POST["firstName"]);
-                $lastName = test_input($_POST["lastName"]);
-                $email = test_input($_POST["email"]);
-                $username = test_input($_POST["username"]);
-                $password = test_input($_POST["password"]);
-              }
-
-              function test_input($data) {
-                $data = trim($data);
-                $data = stripslashes($data);
-                $data = htmlspecialchars($data);
-                return $data;
-              }
-
-              $query = "INSERT INTO user(firstName, lastName, username, password, email) VALUES (:firstName, :lastName, :username, :password, :email)";
-              $statement = $db->prepare($query);
-              $statement->bindValue(':firstName', $firstName);
-              $statement->bindValue(':lastName', $lastName);
-              $statement->bindValue(':username', $username);
-              $statement->bindValue(':password', $password);
-              $statement->bindValue(':email', $email);
-              $statement->execute();
-              $statement->closeCursor();
-              //header("Location: ", "index.html");
-
-            // echo $firstName;
-            // echo "<br>";
-            // echo $lastName;
-            // echo "<br>";
-            // echo $email;
-            // echo "<br>";
-            // echo $username;
-            // echo "<br>";
-            // echo $password;
-            // function insertData()
-            // {
-            //    require('connect-db.php');
-               
-            //    $course_id = "newid_from_insertData";
-            //    $course_desc = "newdesc_from_insertData";
-               
-            //    $query = "INSERT INTO courses (courseID, course_desc) VALUES (:course_id, :course_desc)";
-            //    $firstName = "Shahiiiira";
-            //    $lastName = "Ali";
-            //    $username = "Falling";
-            //    $password = "LuvOpenLettersss<3";
-            //    $email = "monkeyasss@gmail.com";
-
-            //   $firstName = $lastName = $password = $username = $email = "";
-
-            //   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            //     $firstName = test_input($_POST["firstName"]);
-            //     $lastName = test_input($_POST["lastName"]);
-            //     $email = test_input($_POST["email"]);
-            //     $username = test_input($_POST["username"]);
-            //     $password = test_input($_POST["password"]);
-            //   }
-
-            //   function test_input($data) {
-            //     $data = trim($data);
-            //     $data = stripslashes($data);
-            //     $data = htmlspecialchars($data);
-            //     return $data;
-            //   }
-               
-
-
-            //    $query = "INSERT INTO user(firstName, lastName, username, password, email) VALUES (:firstName, :lastName, :username, :password, :email)";
-            //    $statement = $db->prepare($query);
-            //    $statement->bindValue(':firstName', $firstName);
-            //    $statement->bindValue(':lastName', $lastName);
-            //    $statement->bindValue(':username', $username);
-            //    $statement->bindValue(':password', $password);
-            //    $statement->bindValue(':email', $email);
-            //    $statement->execute();
-            //    $statement->closeCursor();
-            // }
-          ?>
+          
           <script>
               var validateInfo = function(){
                 var fN = document.getElementById("id_firstName").value;

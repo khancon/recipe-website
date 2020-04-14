@@ -45,7 +45,7 @@ try
 {
 //  $db = new PDO("mysql:host=$hostname;dbname=$dbname, $username, $password);
    $db = new PDO($dsn, $username, $password);
-   echo "<p>I GOT IT YESS</p>";
+   //echo "<p>I GOT IT YESS</p>";
    // dispaly a message to let us know that we are connected to the database 
    // echo "<p>You are connected to the database</p>";
 }

@@ -43,13 +43,16 @@
         include('header.php');
         require('connect-db.php');
 
-        $username = $recipename = $ingredients = $directions = "";
+        $username = $recipename = $ingredients = $directions = $cuisine = $firstName = $lastName = "";
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $username = $_SESSION["username"];
+            $username = $_SESSION['username'];
+            $firstName = $_SESSION['firstName'];
+            $lastName = $_SESSION['lastName'];
             $recipename = test_input($_POST["recipename"]);
             $directions = test_input($_POST["directions"]);
             $ingredients = test_input($_POST["ingredients"]);
+            $cuisine = test_input($_POST["cuisine"]);
         }
 
         function test_input($data) {
@@ -68,12 +71,15 @@
         echo $ingredients;
         echo "</br>";
 
-        $query = "INSERT INTO recipe(username, recipename, ingredients, directions) VALUES (:username, :recipename, :ingredients, :directions)";
+        $query = "INSERT INTO recipe(username, recipename, ingredients, directions, cuisine, firstName, lastName) VALUES (:username, :recipename, :ingredients, :directions, :cuisine, :firstName, :lastName)";
         $statement = $db->prepare($query);
         $statement->bindValue(':username', $username);
         $statement->bindValue(':recipename', $recipename);
         $statement->bindValue(':directions', $directions);
         $statement->bindValue(':ingredients', $ingredients);
+        $statement->bindValue(':cuisine', $cuisine);
+        $statement->bindValue(':firstName', $firstName);
+        $statement->bindValue(':lastName', $lastName);
         $statement->execute();
         $statement->closeCursor();
     ?>

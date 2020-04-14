@@ -101,30 +101,84 @@
                     </div>
                 </aside>
                 <div class="col-md-8 blog-main">
-                    <div class="jumbotron p-4 p-md-5 text-white rounded" style="background-color: #b154d8;">
+                    <!-- <div class="jumbotron p-4 p-md-5 text-white rounded" style="background-color: #b154d8;">
                         <div class="col-md-6 px-0">
                           <h1 class="display-4 font-italic">Veganismssss</h1>
                           <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
                           <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
                         </div>
-                    </div>
+                    </div> -->
                     
                     <div id="blogPosts" class="row mb-2">
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                 <div class="col p-4 d-flex flex-column position-static">
                                     <strong class="d-inline-block mb-2" style="color:#b154d8">South Asian</strong>
                                     <h3 class="mb-0">Featured post</h3>
-                                    <div class="mb-1 text-muted">Nov 12</div>
+                                    <div class="mb-1 text-muted">Shivali Dessai</div>
                                     <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
                                     <a href="#" class="stretched-link">Continue reading</a>
                                 </div>
-                                    <div class="col-auto d-none d-lg-block">
-                                    <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
+                        </div> -->
+                        <?php 
+                            require('connect-db.php');
+
+                            // To prepare a SQL statement, use the prepare() method of the PDO object
+                            //    syntax:   prepare(sql_statement)
+                         
+                            // To execute a SQL statement, use the bindValue() method of the PDO statement object
+                            // to bind the specified value to the specified param in the prepared statement 
+                            //    syntax:   bindValue(param, value)
+                            // then use the execute() method to execute the prepared statement
+                         
+                            // Excute a SQL statement that doesn't have params
+                            $query = "SELECT * FROM recipe";
+                            $statement = $db->prepare($query); 
+                            $statement->execute();
+                         
+                            // fetchAll() returns an array for all of the rows in the result set
+                            $results = $statement->fetchAll();
+                         
+                            // closes the cursor and frees the connection to the server so other SQL statements may be issued 
+                            $statement->closecursor();
+                         
+                            foreach ($results as $result)
+                            {	
+                                //echo $result['firstName'] . ": " . substr($result['directions'], 0, 75) . "...<br/>";
+                                echo "<div class=\"col-md-6\">";
+                                    echo "<div class=\"row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative\">";
+                                        echo "<div class=\"col p-4 d-flex flex-column position-static\">";
+                                            echo "<strong class=\"d-inline-block mb-2\" style=\"color:#b154d8\">" . $result['cuisine'] . "</strong>";
+                                            echo "<h3 class=\"mb-0\">" . $result['recipename'] . "</h3>";
+                                            echo "<div class=\"mb-1 text-muted\">" . $result['firstName'] . " " . $result['lastName'] . "</div>";
+                                            echo "<p class=\"card-text mb-auto\">" . substr($result['directions'], 0, 50) . "...</p>";
+                                            echo "<a href=\"blog-post-view.php?recipename=" .$result['recipename']. "&firstName=" .$result['firstName']. "&lastName=" .$result['lastName']. "&directions=" .$result['directions']. "&ingredients=" .$result['ingredients']. "&cuisine=" .$result['cuisine']. "\" class=\"stretched-link\">Continue reading</a>";
+                                        echo "</div>";
+                                    echo "</div>";   
+                                echo "</div>"; 
+                            }
+                         
+                         
+                            // Execute a SQL statement that has a param, use a colon followed by a param name
+                            // $someid = "id1";
+                            // $query = "SELECT * FROM courses WHERE test_id = :someid";
+                            // $statement = $db->prepare($query);
+                            // $statement->bindValue(':someid', $someid);
+                            // $statement->execute();
+                         
+                            // // fetchAll() returns an array for all of the rows in the result set
+                            // $results = $statement->fetchAll();
+                         
+                            // // closes the cursor and frees the connection to the server so other SQL statements may be issued
+                            // $statement->closecursor();
+                         
+                            // foreach ($results as $result)
+                            // {
+                            //    echo "select a row where courseID=id1 --->" . $result['courseID'] . ":" . $result['course_desc'] . "<br/>";
+                            // }
+                        ?>
+                        <!-- <div class="col-md-6">
                             <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                 <div class="col p-4 d-flex flex-column position-static">
                                     <strong class="d-inline-block mb-2" style="color:#b154d8">American</strong>
@@ -133,8 +187,12 @@
                                     <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
                                     <a href="#" class="stretched-link">Continue reading</a>
                                 </div>
-                                    <div class="col-auto d-none d-lg-block">
-                                    <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                <div class="col-auto d-none d-lg-block">
+                                    <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+                                        <title>Placeholder</title>
+                                        <rect width="100%" height="100%" fill="#55595c"></rect>
+                                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
@@ -193,11 +251,11 @@
                                     <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- <a id="new_posts" class="btn btn-outline-primary" href="#">New Posts</a> -->
                     <!-- <button id="new_posts" class="btn btn-outline-primary" onclick="">New Posts</button> -->
-                    <input type="button" class="btn btn-outline-primary" id="newPosts" value="Load More" onclick="addRows()"/>
+                    <!-- <input type="button" class="btn btn-outline-primary" id="newPosts" value="Load More" onclick="addRows()"/> -->
                 </div>
             </div>
             <br>
@@ -213,25 +271,25 @@
             // document.getElementById("new_posts").onClick = function(){
             //     document.getElementById("new_posts").innerHTML = "Old Posts";
             // };
-            addRows = () =>
-            {
-                var categories = [
-                    'East Asian', 'South Asian', 'East African', 'West African', 'African',
-                    'American', 'European', 'Latin American', 'Mediterranean', 'Arab/North African', 'Other'
-                ];
-                var blogPost = "";
-                for(var i = 0; i < 6; i++){
-                    //this will be updated once back end functionality is 
-                    //set up properly so we can retrieve data from there
-                    //to continuously load in more blog posts but for now 
-                    //we just randomly spawn concept posts based on category
-                    //of food
-                    var ind1 = Math.floor(Math.random() * Math.floor(categories.length));
-                    blogPost += "<div class='col-md-6'><div class='row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative'>    <div class='col p-4 d-flex flex-column position-static'>        <strong class='d-inline-block mb-2' style='color:#b154d8'>"+ categories[ind1]+"</strong>        <h3 class='mb-0'>Post title</h3>        <div class='mb-1 text-muted'>Nov 11</div>        <p class='mb-auto'>This is a wider card with supporting text below as a natural lead-in to additional content.</p>        <a href='#' class='stretched-link'>Continue reading</a>    </div>    <div class='col-auto d-none d-lg-block'>        <svg class='bd-placeholder-img' width='200' height='250' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: Thumbnail'><title>Placeholder</title><rect width='100%' height='100%' fill='#55595c'></rect><text x='50%' y='50%' fill='#eceeef' dy='.3em'>Thumbnail</text></svg>    </div></div></div>";
-                }
-                //var ind2 = Math.floor(Math.random() * Math.floor(categories.length));
-                document.getElementById("blogPosts").innerHTML += blogPost;
-            }
+            // addRows = () =>
+            // {
+            //     var categories = [
+            //         'East Asian', 'South Asian', 'East African', 'West African', 'African',
+            //         'American', 'European', 'Latin American', 'Mediterranean', 'Arab/North African', 'Other'
+            //     ];
+            //     var blogPost = "";
+            //     for(var i = 0; i < 6; i++){
+            //         //this will be updated once back end functionality is 
+            //         //set up properly so we can retrieve data from there
+            //         //to continuously load in more blog posts but for now 
+            //         //we just randomly spawn concept posts based on category
+            //         //of food
+            //         var ind1 = Math.floor(Math.random() * Math.floor(categories.length));
+            //         blogPost += "<div class='col-md-6'><div class='row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative'>    <div class='col p-4 d-flex flex-column position-static'>        <strong class='d-inline-block mb-2' style='color:#b154d8'>"+ categories[ind1]+"</strong>        <h3 class='mb-0'>Post title</h3>        <div class='mb-1 text-muted'>Nov 11</div>        <p class='mb-auto'>This is a wider card with supporting text below as a natural lead-in to additional content.</p>        <a href='#' class='stretched-link'>Continue reading</a>    </div>    <div class='col-auto d-none d-lg-block'>        <svg class='bd-placeholder-img' width='200' height='250' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: Thumbnail'><title>Placeholder</title><rect width='100%' height='100%' fill='#55595c'></rect><text x='50%' y='50%' fill='#eceeef' dy='.3em'>Thumbnail</text></svg>    </div></div></div>";
+            //     }
+            //     //var ind2 = Math.floor(Math.random() * Math.floor(categories.length));
+            //     document.getElementById("blogPosts").innerHTML += blogPost;
+            // }
         </script>
     </body>
 </html>

@@ -73,16 +73,15 @@
             <br>
             <label for="ingredients">Ingredients List:</label><br>
             <input type="text" id="ingredients" name="ingredients"><br><br>
-            
+            <label for="cuisine">Cuisine Type:</label><br>
+            <input type="text" id="cuisine" name="cuisine" value="i.e. Italian, Indian, etc."><br><br>
 
-
-            Select image to upload:
-            <input type="file" name="fileToUpload" id="fileToUpload">
+            <!-- Select image to upload:
+            <input type="file" name="fileToUpload" id="fileToUpload"> -->
             
             <br><br>
             Recipe Directions : <br />
-            <textarea rows="5" cols="50" name="directions">Enter directions here...
-         </textarea>
+            <textarea rows="5" cols="50" name="directions">Enter directions here...</textarea>
             <br><br>
             <input type="submit" value="Submit">
         </form>
