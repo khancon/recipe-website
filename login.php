@@ -162,7 +162,7 @@
                       <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> -->
                     </form>
                     <?php 
-                      if(isset($_SESSION['username'])){
+                      if(isset($_SESSION['username']) & !isset($_SESSION['failure'])){
                         echo "<br>";
                         echo "Successfully signed in as ";
                         echo $_SESSION['username'];
