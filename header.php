@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php //session_start(); ?>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #8e44ad;">
         <div class="container-fluid">
@@ -30,7 +30,7 @@
                   <li class="nav-item">
                     <?php 
                       $stat = (session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE);
-                      if($stat == TRUE){
+                      if($stat == TRUE && isset($_SESSION['firstName'])){
                         echo "<a class=\"nav-link\" href=\"./login.php\">Hi ";
                         echo $_SESSION['firstName'];
                         echo "!</a>";

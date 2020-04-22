@@ -50,7 +50,10 @@
                 </div>
             </nav>
         </header> -->
-        <?php include('header.php') ?>
+        <?php 
+            session_start();
+            include('header.php');
+        ?>
         <div class="container-fluid">
             <!-- Jumbo Tron Top Card -->
             <br>
@@ -160,6 +163,7 @@
                             }
                          
                          
+
                             // Execute a SQL statement that has a param, use a colon followed by a param name
                             // $someid = "id1";
                             // $query = "SELECT * FROM courses WHERE test_id = :someid";

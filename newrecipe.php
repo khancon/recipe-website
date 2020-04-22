@@ -61,7 +61,10 @@
             </div>
         </nav>
     </header> -->
-    <?php include('header.php') ?>
+    <?php 
+        session_start();
+        include('header.php');
+    ?>
     <div class="container">
         <br>
         <h1>Add New Recipe...</h1>

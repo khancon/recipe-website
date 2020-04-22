@@ -24,7 +24,10 @@
     <title>Add New Recipe</title>
 </head>
 <body>
-    <?php include('header.php'); ?>
+    <?php 
+        session_start();
+        include('header.php');
+    ?>
     <div class="container">
         <br>
         <?php 

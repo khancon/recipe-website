@@ -61,7 +61,61 @@
           //   echo "BEFORE FALSE \n";
           // }
         ?>
-        <?php include('header.php') ?>
+        <?php
+          require('connect-db.php');
+          global $db;
+
+          if($_SERVER['REQUEST_METHOD'] == 'POST')
+          {
+            $email = htmlspecialchars($_POST['email']);
+            $password = htmlspecialchars($_POST['password']);
+
+            $query = "SELECT * FROM user WHERE email=:email";
+            $statement = $db->prepare($query);
+            $statement->bindValue(':email', $email);
+            // $statement->bindValue(':due', $due);
+            // $statement->bindValue(':priority', $priority);
+            // $statement->bindValue(':id', $id);
+            $statement->execute();
+
+            session_start();
+            if($statement->rowCount() > 0){
+              $t = $statement->fetch();
+              $p = $t[3];
+              // print_r($t);
+              // echo "\n";
+              // echo $p;
+              // echo "\n";
+              // echo $password;
+              // echo "\n";
+              //echo $t;
+              if ($password == $p){
+                $firstName = $t[0];
+                $lastName = $t[1];
+                $username = $t[2];
+                $_SESSION['email'] = $email;
+                $_SESSION['firstName'] = $firstName;
+                $_SESSION['lastName'] = $lastName;
+                $_SESSION['username'] = $username;
+                // echo "<br>";
+                // echo "Successfully signed in as ";
+                // echo $_SESSION['username'];
+                // echo "!";
+                //header("Location: ./index.php");
+              } else {
+                $_SESSION['failure'] = "Incorrect password";
+                // echo "<br>";
+                // echo "Incorrect password";
+              } 
+            } else {
+              // echo "<br>";
+              // echo "Incorrect email";
+              $_SESSION['failure'] = "Incorrect email";
+            }
+            $statement->closeCursor();
+          } 
+          include('header.php') 
+        ?>
         <?php 
           // $stat = (session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE);
           // if($stat == TRUE){
@@ -108,55 +162,64 @@
                       <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> -->
                     </form>
                     <?php 
-                      require('connect-db.php');
-                      global $db;
+                      if(isset($_SESSION['username'])){
+                        echo "<br>";
+                        echo "Successfully signed in as ";
+                        echo $_SESSION['username'];
+                        echo "!";
+                      } else if(isset($_SESSION['failure'])){
+                        echo "<br>";
+                        echo $_SESSION['failure'];
+                      } 
+                      // require('connect-db.php');
+                      // global $db;
 
-                      if($_SERVER['REQUEST_METHOD'] == 'POST')
-                      {
-                        $email = htmlspecialchars($_POST['email']);
-                        $password = htmlspecialchars($_POST['password']);
+                      // if($_SERVER['REQUEST_METHOD'] == 'POST')
+                      // {
+                      //   $email = htmlspecialchars($_POST['email']);
+                      //   $password = htmlspecialchars($_POST['password']);
 
-                        $query = "SELECT * FROM user WHERE email=:email";
-                        $statement = $db->prepare($query);
-                        $statement->bindValue(':email', $email);
-                        // $statement->bindValue(':due', $due);
-                        // $statement->bindValue(':priority', $priority);
-                        // $statement->bindValue(':id', $id);
-                        $statement->execute();
+                      //   $query = "SELECT * FROM user WHERE email=:email";
+                      //   $statement = $db->prepare($query);
+                      //   $statement->bindValue(':email', $email);
+                      //   // $statement->bindValue(':due', $due);
+                      //   // $statement->bindValue(':priority', $priority);
+                      //   // $statement->bindValue(':id', $id);
+                      //   $statement->execute();
 
-                        if($statement->rowCount() > 0){
-                          $t = $statement->fetch();
-                          $p = $t[3];
-                          // print_r($t);
-                          // echo "\n";
-                          // echo $p;
-                          // echo "\n";
-                          // echo $password;
-                          // echo "\n";
-                          //echo $t;
-                          if ($password == $p){
-                            $firstName = $t[0];
-                            $lastName = $t[1];
-                            $username = $t[2];
-                            $_SESSION['email'] = $email;
-                            $_SESSION['firstName'] = $firstName;
-                            $_SESSION['lastName'] = $lastName;
-                            $_SESSION['username'] = $username;
-                            echo "<br>";
-                            echo "Successfully signed in as ";
-                            echo $_SESSION['username'];
-                            echo "!";
-                            //header("Location: ./index.php");
-                          } else {
-                            echo "<br>";
-                            echo "Incorrect password";
-                          } 
-                        } else {
-                          echo "<br>";
-                          echo "Incorrect email";
-                        }
-                        $statement->closeCursor();
-                      }
+                      //   if($statement->rowCount() > 0){
+                      //     $t = $statement->fetch();
+                      //     $p = $t[3];
+                      //     // print_r($t);
+                      //     // echo "\n";
+                      //     // echo $p;
+                      //     // echo "\n";
+                      //     // echo $password;
+                      //     // echo "\n";
+                      //     //echo $t;
+                      //     if ($password == $p){
+                      //       $firstName = $t[0];
+                      //       $lastName = $t[1];
+                      //       $username = $t[2];
+                      //       $_SESSION['email'] = $email;
+                      //       $_SESSION['firstName'] = $firstName;
+                      //       $_SESSION['lastName'] = $lastName;
+                      //       $_SESSION['username'] = $username;
+                      //       echo "<br>";
+                      //       echo "Successfully signed in as ";
+                      //       echo $_SESSION['username'];
+                      //       echo "!";
+                      //       //header("Location: ./index.php");
+                      //     } else {
+                      //       echo "<br>";
+                      //       echo "Incorrect password";
+                      //     } 
+                      //   } else {
+                      //     echo "<br>";
+                      //     echo "Incorrect email";
+                      //   }
+                      //   $statement->closeCursor();
+                      // }
                       // echo "\n";
                       // echo $_SESSION['email'];
                       // echo "\n";
