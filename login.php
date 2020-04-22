@@ -170,6 +170,7 @@
                       } else if(isset($_SESSION['failure'])){
                         echo "<br>";
                         echo $_SESSION['failure'];
+                        session_destroy();
                       } 
                       // require('connect-db.php');
                       // global $db;
