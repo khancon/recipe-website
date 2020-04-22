@@ -65,6 +65,7 @@
           require('connect-db.php');
           global $db;
 
+          session_start();
           if($_SERVER['REQUEST_METHOD'] == 'POST')
           {
             $email = htmlspecialchars($_POST['email']);
@@ -78,7 +79,6 @@
             // $statement->bindValue(':id', $id);
             $statement->execute();
 
-            session_start();
             if($statement->rowCount() > 0){
               $t = $statement->fetch();
               $p = $t[3];
@@ -97,6 +97,7 @@
                 $_SESSION['firstName'] = $firstName;
                 $_SESSION['lastName'] = $lastName;
                 $_SESSION['username'] = $username;
+                $_SESSION['count'] = '1';
                 // echo "<br>";
                 // echo "Successfully signed in as ";
                 // echo $_SESSION['username'];
@@ -162,11 +163,14 @@
                       <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> -->
                     </form>
                     <?php 
-                      if(isset($_SESSION['username']) & !isset($_SESSION['failure'])){
-                        echo "<br>";
-                        echo "Successfully signed in as ";
-                        echo $_SESSION['username'];
-                        echo "!";
+                      if(isset($_SESSION['username']) & !isset($_SESSION['failure']) & isset($_SESSION['count'])){
+                        if($_SESSION['count'] == '1'){
+                          echo "<br>";
+                          echo "Successfully signed in as ";
+                          echo $_SESSION['username'];
+                          echo "!";
+                          $_SESSION['count'] = '0';
+                        }
                       } else if(isset($_SESSION['failure'])){
                         echo "<br>";
                         echo $_SESSION['failure'];
